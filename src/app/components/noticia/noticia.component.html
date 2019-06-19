@@ -1,3 +1,10 @@
-<p>
-  noticia works!
-</p>
+<ion-card>
+  <ion-card-header>
+    <ion-card-title class="txtTitle"> {{ article.source.name }} </ion-card-title>
+    <ion-card-subtitle class="txtSubtitle"> {{ article.title }} </ion-card-subtitle> 
+  </ion-card-header>
+  <ion-img [src]="article.urlToImage" *ngIf="article.urlToImage"></ion-img>
+  <ion-card-content class="txtGeneral">
+    {{ article.description }}
+  </ion-card-content> 
+</ion-card>
