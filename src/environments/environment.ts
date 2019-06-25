@@ -4,9 +4,10 @@
 
 export const environment = {
   production: false,
-  apiKey: '6d351fb73ddd44659198f9f341835474'
+  apiKey: '6d351fb73ddd44659198f9f341835474',
+  apiUrl: 'https://newsapi.org/v2'
 };
-
+ 
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
