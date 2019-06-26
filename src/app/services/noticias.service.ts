@@ -13,6 +13,11 @@ let headers = new HttpHeaders({
 })
 export class NoticiasService {
 
+  headlinesPage = 0;
+
+  categoriaActual = '';
+  categoriaPagina = 0;
+
   constructor(private http: HttpClient) { }
 
   llamarAPI<T>(query) {
@@ -20,13 +25,17 @@ export class NoticiasService {
     return this.http.get<T>(query, { headers });
   }
   getNoticias() {
-    /*return this.http.get<RespuestaNoticias>(`
-    https://newsapi.org/v2/everything?q=bitcoin&from=2019-05-19&sortBy=publishedAt&apiKey=526eaee3668b49c39cd7e51a4f5244c3
-    `);*/
-    return this.llamarAPI<RespuestaNoticias>(`/top-headlines?country=us`);
+    this.headlinesPage++;
+    return this.llamarAPI<RespuestaNoticias>(`/top-headlines?country=us&page=${ this.headlinesPage }`);
   }
 
   getNoticiasPorCategoria(category: string) {
-    return this.llamarAPI<RespuestaNoticias>(`/top-headlines?country=us&category=${category}`);
+    if( this.categoriaActual === category) {
+      this.categoriaPagina++;
+    } else {
+      this.categoriaPagina = 1;
+      this.categoriaActual = category;
+    }
+    return this.llamarAPI<RespuestaNoticias>(`/top-headlines?country=us&category=${category}&page=${ this.categoriaPagina}`);
   }
 }

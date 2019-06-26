@@ -28,21 +28,20 @@ export class Tab2Page implements OnInit{
     this.cargarCategoria( event.detail.value );
   }
 
-  cargarCategoria(categoria: string) {
+  cargarCategoria(categoria: string, event?) {
     this.NoticiasService.getNoticiasPorCategoria(categoria)
     .subscribe( resp => {
       console.log(resp);
       this.noticias.push( ...resp.articles );
+
+      if(event){
+          event.target.complete();
+      }
     });
   }
 
-  /*
-  setNoticias(category: string) {
-    this.NoticiasService.getNoticiasPorCategoria(category)
-    .subscribe( resp => {
-      console.log(resp);
-      this.categorias.push( ...resp.articles );
-    });
-  }*/
+  loadData( event ) {
+    this.cargarCategoria( this.segments.value, event );
+  }
 
 }
